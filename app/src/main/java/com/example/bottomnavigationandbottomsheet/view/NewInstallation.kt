@@ -1,0 +1,69 @@
+package com.example.bottomnavigationandbottomsheet.view
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.bottomnavigationandbottomsheet.R
+import com.example.bottomnavigationandbottomsheet.screens.customcontrol.CustomOutlinedTextField
+
+@Composable
+fun NewInstallation() {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        val isVisible = remember {
+            mutableStateOf(false)  // Assuming resume.xml is in res/drawable
+        }
+        var uname by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
+        val state = rememberTextFieldState("")
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center)
+                .padding(8.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start
+        ) {
+            CustomOutlinedTextField(
+                value = uname,
+                onValueChange =state,
+                label = "Username",
+                leadingIcon = Icons.Default.Person, // Optional
+                leadingIconClick = { /* Handle icon click */ } // Optional
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            CustomOutlinedTextField(
+                value = password,
+                onValueChange =state,
+                label = "Password",
+                leadingIcon = Icons.Default.Lock, // Optional
+                leadingIconClick = { /* Handle icon click */ }, // Optional
+                trailingVisibleIcon = R.drawable.outline_visibility_24,
+                trailingInvisibleIcon = R.drawable.baseline_visibility_off_24,
+                isPasswordVisible = isVisible
+            )
+
+        }
+    }
+}
+
