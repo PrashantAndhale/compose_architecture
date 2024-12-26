@@ -120,6 +120,12 @@ dependencies {
 
     // Coil Image Loading
     implementation(libs.coil.compose)
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.ui.test.junit4.android)
+    implementation(libs.core)
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.turbine)
+    testImplementation(libs.robolectric)
 
 
     // Testing Libraries

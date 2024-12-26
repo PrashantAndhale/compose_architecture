@@ -45,6 +45,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -80,7 +81,6 @@ class MainActivity : BaseActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun NavBotSheet() {
-
         val items = listOf(
             NavigationItem(
                 title = "Profile",
@@ -115,7 +115,7 @@ class MainActivity : BaseActivity() {
         val topBarTitle = currentRoute ?: "Profile"
         ModalNavigationDrawer(
             gesturesEnabled = drawerState.isOpen, drawerContent = {
-                ModalDrawerSheet() {
+                ModalDrawerSheet(modifier = Modifier.testTag("Navigation Drawer")) {
                     NavBarHeader()
                     Spacer(modifier = Modifier.height(8.dp))
                     NavBarBody(
@@ -172,7 +172,7 @@ class MainActivity : BaseActivity() {
                                 }) {
                                     Icon(
                                         Icons.AutoMirrored.Filled.ArrowBack,
-                                        contentDescription = "Menu"
+                                        contentDescription = "Back"
                                     )
                                 }
                             }
@@ -183,7 +183,10 @@ class MainActivity : BaseActivity() {
                                     navigationControl.navigate(Screens.Notification.route) {
                                         mNavigate.value = true
                                     }
-                                }, modifier = Modifier.size(80.dp)) {
+                                }, modifier = Modifier
+                                    .size(80.dp)
+                                    .testTag("Notifications")
+                                ) {
                                     BadgedBox(modifier = Modifier.padding(end = 10.dp), badge = {
                                         Badge {
                                             Text(text = "8")
@@ -215,12 +218,12 @@ class MainActivity : BaseActivity() {
                             shape = CircleShape,
                             modifier = Modifier
                                 .size(48.dp)
-                                .offset(y = 40.dp),
-
-                            ) {
+                                .offset(y = 40.dp)
+                                .testTag("AddButton"),
+                        ) {
                             Icon(
                                 imageVector = Icons.Default.Add,
-                                contentDescription = null,
+                                contentDescription = "Add",
                                 modifier = Modifier.size(24.dp)
                             )
                         }
@@ -247,6 +250,7 @@ class MainActivity : BaseActivity() {
             containerColor = colorResource(id = R.color.blue),
             modifier = modifier
                 .height(60.dp)
+                .testTag("BottomBar")
                 .clip(RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp))
         ) {
             IconButton(
@@ -255,7 +259,9 @@ class MainActivity : BaseActivity() {
                     navigationControl.navigate(Screens.Resume.route) {
                         popUpTo(0)
                     }
-                }, modifier = Modifier.weight(1f)
+                }, modifier = Modifier
+                    .weight(1f)
+                    .testTag("ResumeButton")
             ) {
                 BadgedBox(badge = {
                     Badge(modifier = Modifier.offset(x = 4.dp, y = (0).dp)) {
@@ -268,8 +274,10 @@ class MainActivity : BaseActivity() {
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.resume),
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Resume",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .testTag("Resume"),
                         tint = if (selected.value == R.drawable.resume) Color.White else Color.DarkGray
                     )
                 }
@@ -281,11 +289,13 @@ class MainActivity : BaseActivity() {
                     navigationControl.navigate(Screens.Calender.route) {
                         popUpTo(0)
                     }
-                }, modifier = Modifier.weight(1f)
+                }, modifier = Modifier
+                    .weight(1f)
+                    .testTag("CalendarButton")
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.calender),
-                    contentDescription = null,
+                    contentDescription = "Calendar",
                     modifier = Modifier.size(24.dp),
                     tint = if (selected.value == R.drawable.calender) Color.White else Color.DarkGray
 
@@ -297,13 +307,16 @@ class MainActivity : BaseActivity() {
                     navigationControl.navigate(Screens.Completed.route) {
                         popUpTo(0)
                     }
-                }, modifier = Modifier.weight(1f)
+                }, modifier = Modifier
+                    .weight(1f)
+                    .testTag("CompletedButton")
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.completed),
-                    contentDescription = null,
+                    contentDescription = "Completed",
                     modifier = Modifier.size(24.dp),
                     tint = if (selected.value == R.drawable.completed) Color.White else Color.DarkGray
+
                 )
             }
             IconButton(
@@ -312,33 +325,20 @@ class MainActivity : BaseActivity() {
                     navigationControl.navigate(Screens.Sync.route) {
                         popUpTo(0)
                     }
-                }, modifier = Modifier.weight(1f)
+                }, modifier = Modifier
+                    .weight(1f)
+                    .testTag("StarredButton")
             ) {
-                BadgedBox(badge = {
-                    Badge(modifier = Modifier.offset(x = 4.dp, y = (0).dp)) {
-                        CustomText(
-                            text = "3",
-                            fontSize = 12
-                        )
-                    }
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.sync),
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
-                        tint = if (selected.value == R.drawable.sync) Color.White else Color.DarkGray
-                    )
-                }
+                Icon(
+                    painter = painterResource(id = R.drawable.sync),
+                    contentDescription = "Starred",
+                    modifier = Modifier.size(24.dp),
+                    tint = if (selected.value == R.drawable.sync) Color.White else Color.DarkGray
+
+                )
             }
 
         }
+
     }
-
 }
-
-
-
-
-
-
-

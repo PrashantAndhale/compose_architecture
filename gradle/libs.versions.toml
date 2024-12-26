@@ -6,7 +6,7 @@ kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
-espressoCore = "3.6.1"
+espressoCore = "3.5.0"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.12.01"
@@ -41,6 +41,12 @@ materialIconsExtendedAndroid = "1.7.6"
 mockitoCore = "5.4.0"
 kotlinxCoroutinesTest = "1.10.1"
 kotlinReflect = "2.1.20-Beta1"
+junitKtx = "1.2.1"
+uiTestJunit4Android = "1.7.6"
+coreTesting = "2.2.0"
+turbine = "1.2.0"
+robolectric = "4.14.1"
+core = "1.47.0"
 
 [libraries]
 adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "converterGson" }
@@ -90,6 +96,12 @@ androidx-material-icons-extended-android = { group = "androidx.compose.material"
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlinReflect" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-ui-test-junit4-android = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version.ref = "uiTestJunit4Android" }
+androidx-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "coreTesting" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+core = { group = "com.google.ar", name = "core", version.ref = "core" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

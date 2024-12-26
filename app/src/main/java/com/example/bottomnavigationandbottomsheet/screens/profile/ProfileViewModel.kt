@@ -26,7 +26,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val getMoviesUseCases: GetMoviesUseCases,
     private val repository: PagerMoviesRepositoryImpl,
     private val cases: GetMoviesUseCases,
     private val application: Application
@@ -38,7 +37,7 @@ class ProfileViewModel @Inject constructor(
     private val _movies = MutableStateFlow<Resource<List<MoviesItem>>>(Resource.Loading())
     val movies: StateFlow<Resource<List<MoviesItem>>> = _movies
 
-    private val _isConnected = MutableStateFlow<Boolean?>(true)
+    val _isConnected = MutableStateFlow<Boolean?>(true)
     val isConnected: StateFlow<Boolean?> = _isConnected.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -50,7 +49,7 @@ class ProfileViewModel @Inject constructor(
                 when (connectionState) {
                     ConnectionState.Available -> {
                         _isConnected.value = true
-                        fetchMovies() // Refresh movies when internet is available
+                        fetchMovies()
                     }
 
                     ConnectionState.Unavailable -> {
@@ -61,7 +60,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun fetchMovies() {
+    fun fetchMovies() {
         viewModelScope.launch {
             repository.getPagerMovies()
                 .cachedIn(viewModelScope)
@@ -84,11 +83,6 @@ class ProfileViewModel @Inject constructor(
         _isConnected.value = false
     }
 
-    fun showToast(message: String) {
-        viewModelScope.launch {
-            //  _toastMessage.emit(message)
-        }
-    }
 
     fun getMovies() {
         viewModelScope.launch {
