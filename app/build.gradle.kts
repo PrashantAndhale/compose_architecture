@@ -4,7 +4,8 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     alias(libs.plugins.compose.compiler)
-}
+    id("kotlinx-serialization")
+ }
 
 android {
     namespace = "com.example.bottomnavigationandbottomsheet"
@@ -123,6 +124,7 @@ dependencies {
     implementation(libs.androidx.junit.ktx)
     implementation(libs.androidx.ui.test.junit4.android)
     implementation(libs.core)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.turbine)
     testImplementation(libs.robolectric)

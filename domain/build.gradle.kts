@@ -5,6 +5,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     alias(libs.plugins.compose.compiler)
     kotlin("kapt")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -131,6 +132,9 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
+
+    implementation(libs.kotlinx.serialization.json)
+
 
 
 

@@ -1,7 +1,9 @@
 package com.example.bottomnavigationandbottomsheet.screens.profile
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +24,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -30,21 +33,39 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.example.bottomnavigationandbottomsheet.navigation.Screens
 import com.example.bottomnavigationandbottomsheet.screens.NoInternetConnection
 import com.example.bottomnavigationandbottomsheet.screens.customcontrol.CustomText
+import com.example.bottomnavigationandbottomsheet.shareviewmodel.SharedViewModel
 import com.example.common.Resource
 import com.example.domain.model.MoviesItem
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 @Composable
-fun Profile(viewModel: ProfileViewModel = hiltViewModel()) {
+fun Profile(
+    navHostController: NavHostController,
+    sharedViewModel: SharedViewModel = hiltViewModel(),
+    viewModel: ProfileViewModel = hiltViewModel(),
+) {
     val list = viewModel.moviesFlow.collectAsLazyPagingItems()
 
-    LoadUI(list, viewModel)
+    val movies by sharedViewModel.callbackData.collectAsState()
+    LaunchedEffect(movies) {
+        Log.d("Callback Data", "Profile: $movies")
+    }
+
+    LoadUI(sharedViewModel, list, viewModel, navHostController, onItemClick = { movieItem ->
+        val movieItemJson = Json.encodeToString(movieItem)
+        val encodedMovieItemJson = Uri.encode(movieItemJson)
+        navHostController.navigate(Screens.ProfileDetail.route + "/$encodedMovieItemJson")
+    })
     val moviesState by viewModel.movies.collectAsState()
 
     when (val state = moviesState) {
@@ -55,7 +76,14 @@ fun Profile(viewModel: ProfileViewModel = hiltViewModel()) {
         is Resource.Success<*> -> {
             // Show movies list
             state.data?.let {
-                LoadUI(list, viewModel)
+                LoadUI(sharedViewModel,
+                    list,
+                    viewModel,
+                    navHostController,
+                    onItemClick = { movieItem ->
+                        val movieItemJson = Json.encodeToString(movieItem)
+                        navHostController.navigate(Screens.ProfileDetail.route + "/$movieItemJson")
+                    })
             }
         }
 
@@ -77,9 +105,16 @@ fun Profile(viewModel: ProfileViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun LoadUI(list: LazyPagingItems<MoviesItem>, viewModel: ProfileViewModel) {
+fun LoadUI(
+    sharedViewModel: SharedViewModel,
+    list: LazyPagingItems<MoviesItem>,
+    viewModel: ProfileViewModel,
+    navHostController: NavHostController,
+    onItemClick: (MoviesItem) -> Unit
+) {
     val isConnected by viewModel.isConnected.collectAsState()
     Log.d("IsConnected", "IsConnected--->" + isConnected)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -97,7 +132,7 @@ fun LoadUI(list: LazyPagingItems<MoviesItem>, viewModel: ProfileViewModel) {
                 if (list.itemSnapshotList.size > 0) {
                     items(list.itemSnapshotList) { movieItem ->
                         if (movieItem != null) {
-                            MovieItem(movieItem)
+                            MovieItem(movieItem, navHostController, onItemClick)
                         }
                     }
                 }
@@ -128,7 +163,9 @@ fun LoadUI(list: LazyPagingItems<MoviesItem>, viewModel: ProfileViewModel) {
 
 
 @Composable
-fun MovieItem(moviesItem: MoviesItem) {
+fun MovieItem(
+    moviesItem: MoviesItem, navHostController: NavHostController, onItemClick: (MoviesItem) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -151,9 +188,10 @@ fun MovieItem(moviesItem: MoviesItem) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(18.dp),
-
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(18.dp)
+                    .clickable {
+                        onItemClick(moviesItem)
+                    }, verticalAlignment = Alignment.CenterVertically
             ) {
                 CircularImage()
                 Spacer(modifier = Modifier.width(8.dp))

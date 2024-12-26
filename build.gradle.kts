@@ -13,6 +13,7 @@ buildscript {
     }
     dependencies {
         classpath(libs.hilt.android.gradle.plugin)
+        classpath ("org.jetbrains.kotlin:kotlin-serialization:2.0.0")
     }
 }
 /*task<Delete>("clean") {

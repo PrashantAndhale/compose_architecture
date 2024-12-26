@@ -47,6 +47,7 @@ coreTesting = "2.2.0"
 turbine = "1.2.0"
 robolectric = "4.14.1"
 core = "1.47.0"
+kotlinxSerializationJson = "1.6.3"
 
 [libraries]
 adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "converterGson" }
@@ -102,6 +103,7 @@ androidx-core-testing = { group = "androidx.arch.core", name = "core-testing", v
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 core = { group = "com.google.ar", name = "core", version.ref = "core" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

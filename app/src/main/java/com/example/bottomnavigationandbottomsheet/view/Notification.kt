@@ -7,12 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bottomnavigationandbottomsheet.navigation.Screens
+import com.example.bottomnavigationandbottomsheet.screens.customcontrol.CustomAnimatedBorderButton
 import com.example.bottomnavigationandbottomsheet.screens.customcontrol.CustomOutlinedTextField
 
 @Composable
@@ -117,17 +114,9 @@ fun Notification(navHostController: NavHostController) {
                 label = "Username",
                 leadingIconClick = { /* Handle icon click */ } // Optional
             )
-
-            Button(
-                onClick = {
-                    navHostController.navigate(Screens.NewInstallation.route) {
-                    }
-                },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                Text("LOGIN")
-            }
+            CustomAnimatedBorderButton(onClick = {
+                navHostController.navigate(Screens.NewInstallation.route)
+            }, label = "LOGIN")
         }
     }
 }

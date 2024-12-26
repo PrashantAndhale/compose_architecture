@@ -27,7 +27,8 @@ private val lightScheme = lightColorScheme(
     background = backgroundLight,            // Background color for the light theme.
     onBackground = onBackgroundLight,        // Color for text and icons displayed on top of the background color.
     surface = surfaceLight,                  // Surface color for components like cards, sheets, etc.
-    onSurface = onSurfaceLight,              // Co olor for the highest elevation container.
+    onSurface = onSurfaceLight,
+    // Co olor for the highest elevation container.
 )
 
 

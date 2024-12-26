@@ -9,4 +9,5 @@ sealed class Screens(var route: String) {
     object Sync : Screens("Sync")
     object Notification : Screens("Notification")
     object NewInstallation : Screens("New Installation")
+    object ProfileDetail : Screens("Profile Detail")
 }
