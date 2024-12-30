@@ -9,7 +9,6 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -28,7 +27,7 @@ private val lightScheme = lightColorScheme(
     onBackground = onBackgroundLight,        // Color for text and icons displayed on top of the background color.
     surface = surfaceLight,                  // Surface color for components like cards, sheets, etc.
     onSurface = onSurfaceLight,
-    // Co olor for the highest elevation container.
+    surfaceTint =iconTintLight
 )
 
 
@@ -43,16 +42,8 @@ private val darkScheme = darkColorScheme(
     onBackground = onBackgroundDark,
     surface = surfaceDark,
     onSurface = onSurfaceDark,
+    surfaceTint = iconTintDark
 )
-
-@Immutable
-data class ColorFamily(
-    val color: Color,
-    val onColor: Color,
-    val colorContainer: Color,
-    val onColorContainer: Color
-)
-
 
 @Composable
 fun AppTheme(
@@ -63,13 +54,13 @@ fun AppTheme(
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicDarkColorScheme(context)
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
         darkTheme -> darkScheme
         else -> lightScheme
     }
-    SetStatusBarColor(darkTheme)
+     SetStatusBarColor(darkTheme)
 
     MaterialTheme(
         colorScheme = colorScheme,

@@ -1,4 +1,4 @@
-package com.example.bottomnavigationandbottomsheet.screens.profile
+package com.example.bottomnavigationandbottomsheet.navigation.drawernavigation.movies
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(
+class MovieViewModel @Inject constructor(
     private val repository: PagerMoviesRepositoryImpl,
     private val cases: GetMoviesUseCases,
     private val application: Application
@@ -49,10 +49,13 @@ class ProfileViewModel @Inject constructor(
                 when (connectionState) {
                     ConnectionState.Available -> {
                         _isConnected.value = true
-                        fetchMovies()
+                        getMovies()
+                        // fetchMovies()
+
                     }
 
                     ConnectionState.Unavailable -> {
+                        getMovies()
                         _isConnected.value = false
                     }
                 }

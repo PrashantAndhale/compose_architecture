@@ -1,5 +1,6 @@
-package com.example.bottomnavigationandbottomsheet.view
+package com.example.bottomnavigationandbottomsheet.screens.newinstallation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,14 +21,23 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.bottomnavigationandbottomsheet.R
-import com.example.bottomnavigationandbottomsheet.screens.customcontrol.CustomOutlinedTextField
+import com.example.bottomnavigationandbottomsheet.customcontrol.CustomOutlinedTextField
+import com.example.bottomnavigationandbottomsheet.shareviewmodel.SharedViewModel
 
 @Composable
-fun NewInstallation() {
+fun NewInstallation(navController: NavHostController, sharedViewModel: SharedViewModel) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .fillMaxWidth()
+            .padding(top = 60.dp)
+            .background(
+                color = colorResource(id = R.color.bg_color)
+            )
     ) {
         val isVisible = remember {
             mutableStateOf(false)  // Assuming resume.xml is in res/drawable

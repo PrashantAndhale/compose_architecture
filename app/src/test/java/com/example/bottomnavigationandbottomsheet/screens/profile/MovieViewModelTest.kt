@@ -2,6 +2,7 @@ package com.example.bottomnavigationandbottomsheet.screens.profile
 
 import android.app.Application
 import app.cash.turbine.test
+import com.example.bottomnavigationandbottomsheet.navigation.drawernavigation.movies.MovieViewModel
 import com.example.common.Resource
 import com.example.data.repository.PagerMoviesRepositoryImpl
 import com.example.domain.model.MoviesItem
@@ -21,7 +22,7 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class ProfileViewModelTest {
+class MovieViewModelTest {
 
     @Mock
     lateinit var getMoviesUseCases: GetMoviesUseCases
@@ -32,7 +33,7 @@ class ProfileViewModelTest {
     @Mock
     lateinit var application: Application
 
-    private lateinit var viewModel: ProfileViewModel
+    private lateinit var viewModel: MovieViewModel
 
     private val testDispatcher = StandardTestDispatcher()
     private val testScope = TestScope(testDispatcher)
@@ -42,7 +43,7 @@ class ProfileViewModelTest {
         // Initialize mocks
         MockitoAnnotations.openMocks(this)
         // Setup mock objects
-        viewModel = ProfileViewModel(
+        viewModel = MovieViewModel(
             repository = repository,
             cases = getMoviesUseCases,
             application = application

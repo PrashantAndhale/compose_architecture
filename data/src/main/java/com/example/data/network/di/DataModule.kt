@@ -1,6 +1,5 @@
 package com.example.data.network.di
 
-import android.app.Application
 import android.content.Context
 import com.example.common.Constant
 import com.example.data.network.ApiService

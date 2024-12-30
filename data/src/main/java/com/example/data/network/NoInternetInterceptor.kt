@@ -19,7 +19,8 @@ class NoInternetInterceptor(private val context: Context) : Interceptor {
     }
 
     private fun isNetworkAvailable(): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.activeNetwork?.let {
             connectivityManager.getNetworkCapabilities(it)
         }
