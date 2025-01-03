@@ -21,7 +21,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bottomnavigationandbottomsheet.R
@@ -35,8 +36,17 @@ fun NewInstallation(navController: NavHostController, sharedViewModel: SharedVie
             .fillMaxSize()
             .fillMaxWidth()
             .padding(top = 60.dp)
+            /* .background(
+                 color = colorResource(id = R.color.bg_color)
+             )*/
             .background(
-                color = colorResource(id = R.color.bg_color)
+                Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFF6CA4BD).copy(alpha = 0.6f), // Lighter blue at the top
+                        Color(0xFF287EAD).copy(alpha = 0.8f), // Mid-tone blue
+                        Color(0xFF022C4E).copy(alpha = 1f)   // Darker blue at the bottom
+                    )
+                )
             )
     ) {
         val isVisible = remember {
@@ -46,6 +56,9 @@ fun NewInstallation(navController: NavHostController, sharedViewModel: SharedVie
         var password by rememberSaveable { mutableStateOf("") }
         val state = rememberTextFieldState("")
 
+        var number by remember {
+            mutableStateOf("")
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()

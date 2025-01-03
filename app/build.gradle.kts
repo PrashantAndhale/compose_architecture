@@ -125,6 +125,7 @@ dependencies {
     implementation(libs.androidx.ui.test.junit4.android)
     implementation(libs.core)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.accompanist.permissions)
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.turbine)
     testImplementation(libs.robolectric)

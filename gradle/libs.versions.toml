@@ -48,6 +48,7 @@ turbine = "1.2.0"
 robolectric = "4.14.1"
 core = "1.47.0"
 kotlinxSerializationJson = "1.6.3"
+accompanistPermissions = "0.37.0"
 
 [libraries]
 adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "converterGson" }
@@ -104,6 +105,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 core = { group = "com.google.ar", name = "core", version.ref = "core" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistPermissions" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

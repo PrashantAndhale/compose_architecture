@@ -18,10 +18,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Movie
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -70,6 +68,7 @@ import com.example.bottomnavigationandbottomsheet.navigation.drawernavigation.mo
 import com.example.bottomnavigationandbottomsheet.sharepreference.SharedPreferencesHelper
 import com.example.bottomnavigationandbottomsheet.shareviewmodel.SharedViewModel
 import com.example.bottomnavigationandbottomsheet.ui.theme.AppTheme
+import com.example.bottomnavigationandbottomsheet.utils.HandledPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -89,6 +88,7 @@ class MainActivity : BaseActivity() {
         setContent {
             AppTheme {
                 val sharedViewModel: SharedViewModel = hiltViewModel()  // Initialize ViewModel here
+                HandledPermissions(sharedViewModel)
                 val navigationControl = rememberNavController()
                 val isLogin by sharedViewModel.isLogin.collectAsState()
                 LaunchedEffect(isLogin) {
@@ -98,6 +98,7 @@ class MainActivity : BaseActivity() {
             }
         }
     }
+
 
     @SuppressLint("StateFlowValueCalledInComposition")
     @Composable

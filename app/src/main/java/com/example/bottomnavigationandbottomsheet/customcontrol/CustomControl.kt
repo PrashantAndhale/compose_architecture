@@ -116,9 +116,7 @@ fun CustomOutlinedTextField(
     trailingInvisibleIcon: Int? = null,
     isPasswordVisible: MutableState<Boolean>? = null,
     onGloballyPositioned: (LayoutCoordinates) -> Unit = {} // Add this parameter
-
 ) {
-
     OutlinedTextField(
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
@@ -140,7 +138,7 @@ fun CustomOutlinedTextField(
                 }
             }
         } else null,
-        // visualTransformation = if (isPasswordVisible != null && !isPasswordVisible.value) PasswordVisualTransformation() else VisualTransformation.None,
+        //  visualTransformation = if (isPasswordVisible != null && !isPasswordVisible.value) PasswordVisualTransformation() else VisualTransformation.None,
         label = {
             CustomText(
                 text = label,
@@ -324,3 +322,7 @@ fun LargeDropdownMenuItem(
         }
     }
 }
+
+
+
+

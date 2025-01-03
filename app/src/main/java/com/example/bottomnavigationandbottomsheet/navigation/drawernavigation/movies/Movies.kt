@@ -188,19 +188,20 @@ fun MovieItem(
                 ) {
                     CustomText(
                         text = moviesItem.movie,
-                        fontSize = 20,
+                        fontSize = 16,
                         overflow = TextOverflow.Ellipsis,
                         maxlines = 1,
                         fontWeight = FontWeight.Normal,
                         modifier = Modifier
-                            .padding(start = 12.dp)
+                            .padding(start = 12.dp, top = 8.dp)
                             .weight(3.5f)
                     )
                     CustomText(
                         text = "135+ ch",
+                        textAlign = TextAlign.End,
                         overflow = TextOverflow.Ellipsis,
                         maxlines = 1,
-                        fontSize = 20,
+                        fontSize = 14,
                         fontWeight = FontWeight.Normal,
                         color = colorResource(id = R.color.secondaryTextColor),
                         modifier = Modifier
@@ -209,11 +210,12 @@ fun MovieItem(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 CustomText(
                     text = "Best of the World, Single Installation Record, Watch, Pause with PVR",
                     textAlign = TextAlign.Center,
+                    fontSize = 14,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
@@ -225,7 +227,7 @@ fun MovieItem(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 8.dp, end = 8.dp, top = 8.dp),
+                        .padding(bottom = 16.dp, end = 8.dp, top = 8.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -244,10 +246,10 @@ fun MovieItem(
                             text = "From R 929 pm",
                             boldText = listOf("929"),
                             color = Color.Black,
-                            fontSize = 15,
+                            fontSize = 14,
                             fontWeight = FontWeight.Normal,
                             modifier = Modifier
-                                .width(120.dp)
+                                .width(110.dp)
                                 .padding(vertical = 4.dp, horizontal = 2.dp)
                         )
                     }

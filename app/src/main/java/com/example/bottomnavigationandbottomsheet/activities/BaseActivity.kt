@@ -1,11 +1,14 @@
 package com.example.bottomnavigationandbottomsheet.activities
 
+import android.Manifest
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -16,11 +19,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.bottomnavigationandbottomsheet.R
 import com.example.bottomnavigationandbottomsheet.customcontrol.CustomText
+import com.example.bottomnavigationandbottomsheet.extensionfunctions.isPermanentlyDenied
 import com.example.bottomnavigationandbottomsheet.shareviewmodel.SharedViewModel
 import com.example.data.network.ConnectionState
 import com.example.data.network.utils.observeConnectivityAsFlow
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.google.accompanist.permissions.shouldShowRationale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 
@@ -38,7 +49,6 @@ open class BaseActivity : ComponentActivity() {
         }
         return connectionState
     }
-
     @Composable
     fun manageBackPress(sharedViewModel: SharedViewModel)
     {
