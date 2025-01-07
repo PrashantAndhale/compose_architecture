@@ -53,7 +53,7 @@ fun Login(
     val logoScale by animateFloatAsState(targetValue = 1f, animationSpec = tween(1000))
     val formOffset by animateDpAsState(
         targetValue = 0.dp,
-        animationSpec = tween(1000, delayMillis = 500)
+        animationSpec = tween(500, delayMillis = 250)
     )
     val fadeInLogo = remember { Animatable(0f) }
     val fadeInContent = remember { Animatable(0f) }

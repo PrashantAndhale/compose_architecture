@@ -26,9 +26,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.rememberAsyncImagePainter
@@ -61,15 +62,14 @@ fun Movies(
     sharedViewModel: SharedViewModel = hiltViewModel(),
     viewModel: MovieViewModel = hiltViewModel(),
 ) {
+    val scope = rememberCoroutineScope()
+
     val list = viewModel.moviesFlow.collectAsLazyPagingItems()
-
     val movies by sharedViewModel.callbackData.collectAsState()
-    LaunchedEffect(movies) {
-        Log.d("Callback Data", "Profile: $movies")
-    }
-    val isConnected by viewModel.isConnected.collectAsState()
 
+    val isConnected by viewModel.isConnected.collectAsStateWithLifecycle()
     val moviesState by viewModel.movies.collectAsState()
+
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -52,28 +52,11 @@ android {
         }
     }
 }
-
 dependencies {
-
-
+    // Module Dependencies
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":common"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.core.splashscreen)
-    implementation(libs.accompanist.navigation.animation)
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.coil.kt.coil.compose)
-    implementation(libs.material3)
-    implementation(libs.androidx.material.icons.extended.android)
-
 
     // Core Libraries
     implementation(libs.androidx.core.ktx)
@@ -81,33 +64,29 @@ dependencies {
     implementation(libs.material)
     implementation(libs.support.vector.drawable)
 
-    // Core Android UI
-    implementation(libs.androidx.core.splashscreen)
+    // Compose BOM (Bill of Materials)
+    implementation(platform(libs.androidx.compose.bom))
 
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-
-    // Activity & Compose UI
+    // Core Android UI and Compose
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-
-    // Material Design
     implementation(libs.androidx.material3)
+
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
+
+    // Lifecycle Components
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
-
-    // Compose BOM (Bill of Materials)
-    implementation(platform(libs.androidx.compose.bom))
-
-    // Accompanist Libraries
     implementation(libs.accompanist.navigation.animation)
     implementation(libs.accompanist.flowlayout)
 
-    // Retrofit & Networking
+    // Networking
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)
@@ -119,40 +98,46 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.play.services)
 
-    // Coil Image Loading
+    // Coil for Image Loading
     implementation(libs.coil.compose)
-    implementation(libs.androidx.junit.ktx)
-    implementation(libs.androidx.ui.test.junit4.android)
-    implementation(libs.core)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.accompanist.permissions)
-    testImplementation(libs.androidx.core.testing)
-    testImplementation(libs.turbine)
-    testImplementation(libs.robolectric)
 
+    // Paging Library
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
+    // Permissions
+    implementation(libs.accompanist.permissions)
+
+    // Kotlin Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Dagger Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.coil.kt.coil.compose)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.compose)
+
+    //Icons
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.material.icons.extended)
 
     // Testing Libraries
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    androidTestImplementation(libs.androidx.ui.test.manifest)
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.robolectric)
     testImplementation(libs.kotlin.reflect)
+    testImplementation(libs.androidx.core.testing)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.ui.test.manifest)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    // Dagger Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-
-    //Paging
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.androidx.paging.compose)
 }
+
 
