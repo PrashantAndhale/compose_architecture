@@ -66,9 +66,9 @@ fun Notification(navHostController: NavHostController, sharedViewModel: SharedVi
             .fillMaxSize()
             .fillMaxWidth()
             .padding(top = 60.dp)
-            .background(
+           /* .background(
                 color = colorResource(id = R.color.bg_color)
-            )
+            )*/
     ) {
         var uname by rememberSaveable { mutableStateOf("") }
         var search by rememberSaveable { mutableStateOf("") }
@@ -123,13 +123,13 @@ fun SearchTextField(
         textStyle = TextStyle(
             fontSize = 16.sp,
             textAlign = TextAlign.Start,
-            color = colorResource(id = R.color.primaryTextColor)
+           // color = colorResource(id = R.color.primaryTextColor)
         ),
         leadingIcon = {
             Icon(
                 Icons.Default.Search,
                 contentDescription = "Search Icon",
-                tint = colorResource(id = R.color.primaryTextColor)
+               // tint = colorResource(id = R.color.primaryTextColor)
             )
         },
         trailingIcon = {
@@ -140,12 +140,12 @@ fun SearchTextField(
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Clear Icon",
-                        tint = colorResource(id = R.color.primaryTextColor)
+                      //  tint = colorResource(id = R.color.primaryTextColor)
                     )
                 }
             }
         },
-        colors = TextFieldDefaults.colors(
+       /* colors = TextFieldDefaults.colors(
             focusedTextColor = colorResource(id = R.color.primaryTextColor),
             unfocusedTextColor = colorResource(id = R.color.primaryTextColor),
             disabledTextColor = colorResource(id = R.color.secondaryTextColor),
@@ -153,7 +153,7 @@ fun SearchTextField(
             unfocusedContainerColor = colorResource(id = R.color.bg_color),
             cursorColor = colorResource(id = R.color.blue),
             errorCursorColor = Color.Red
-        ),
+        ),*/
         // Adjust padding by wrapping the inner content with padding modifier
         modifier = Modifier
             .fillMaxWidth()
@@ -213,7 +213,7 @@ fun PinDigitBox(
         modifier = Modifier
             .size(50.dp)
             .focusRequester(focusRequester),
-        colors = TextFieldDefaults.colors(
+       /* colors = TextFieldDefaults.colors(
             focusedTextColor = colorResource(id = R.color.primaryTextColor),
             unfocusedTextColor = colorResource(id = R.color.secondaryTextColor),
             disabledTextColor = colorResource(id = R.color.secondaryTextColor),
@@ -221,7 +221,7 @@ fun PinDigitBox(
             unfocusedContainerColor = colorResource(id = R.color.bg_color),
             cursorColor = colorResource(id = R.color.blue),
             errorCursorColor = Color.Red
-        )
+        )*/
     )
 }
 

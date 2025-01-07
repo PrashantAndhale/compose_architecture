@@ -26,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -96,10 +97,10 @@ fun CustomText(
     Text(
         maxLines = maxlines,
         overflow = overflow,
-        textAlign = textAlign, modifier = modifier, text = annotatedText, color = color,
+        textAlign = textAlign, modifier = modifier, text = annotatedText/*, color = color*/,
         style = TextStyle(
             fontSize = fontSize.sp,
-            fontFamily = fontFamily,
+          /*  fontFamily = fontFamily,*/
             fontWeight = fontWeight
         )
     )
@@ -134,7 +135,7 @@ fun CustomOutlinedTextField(
                     Icon(
                         imageVector = leadingIcon,
                         contentDescription = null,
-                        tint = colorResource(id = R.color.primaryTextColor)
+                       // tint = colorResource(id = R.color.primaryTextColor)
                     )
                 }
             }
@@ -143,7 +144,7 @@ fun CustomOutlinedTextField(
         label = {
             CustomText(
                 text = label,
-                color = colorResource(id = R.color.primaryTextColor)
+              //  color = colorResource(id = R.color.primaryTextColor)
             )
         },
         trailingIcon = if (isPasswordVisible != null && trailingVisibleIcon != null && trailingInvisibleIcon != null) {
@@ -159,7 +160,7 @@ fun CustomOutlinedTextField(
                     }
                 }
             }
-        } else null, textStyle = TextStyle(color = colorResource(id = R.color.primaryTextColor))
+        } else null, //textStyle = TextStyle(color = colorResource(id = R.color.primaryTextColor))
     )
 }
 
@@ -186,9 +187,9 @@ fun CustomAnimatedBorderButton(onClick: () -> Unit, label: String) {
         modifier = Modifier
             .fillMaxWidth()
             .border(
-                width = 4.dp, color = borderColor, shape = RoundedCornerShape(20.dp)
+                width = 2.dp, color = borderColor, shape = RoundedCornerShape(20.dp)
             ),
-        //  colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.blue))
+         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
     ) {
         CustomText(
             text = label, fontWeight = FontWeight.Bold
@@ -305,13 +306,13 @@ fun LargeDropdownMenuItem(
     enabled: Boolean,
     onClick: () -> Unit,
 ) {
-    val contentColor = when {
+   /* val contentColor = when {
         !enabled -> MaterialTheme.colorScheme.onSurface.copy(alpha = ALPHA_DISABLED)
         selected -> MaterialTheme.colorScheme.primary.copy(alpha = ALPHA_FULL)
         else -> MaterialTheme.colorScheme.onSurface.copy(alpha = ALPHA_FULL)
-    }
+    }*/
 
-    CompositionLocalProvider(LocalContentColor provides contentColor) {
+   // CompositionLocalProvider(LocalContentColor provides contentColor) {
         Box(modifier = Modifier
             .clickable(enabled) { onClick() }
             .fillMaxWidth()
@@ -321,7 +322,7 @@ fun LargeDropdownMenuItem(
                 style = MaterialTheme.typography.titleSmall,
             )
         }
-    }
+   // }
 }
 
 

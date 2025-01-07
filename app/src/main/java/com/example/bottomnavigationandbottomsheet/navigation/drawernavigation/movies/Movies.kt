@@ -75,9 +75,9 @@ fun Movies(
             .fillMaxSize()
             .fillMaxWidth()
             .padding(top = 60.dp)
-            .background(
+           /* .background(
                 color = colorResource(id = R.color.bg_color)
-            )
+            )*/
     ) {
         when (val state = moviesState) {
             is Resource.Loading -> {
@@ -166,9 +166,9 @@ fun MovieItem(
             .padding(horizontal = 2.dp, vertical = 8.dp)
     ) {
         Card(
-            colors = CardDefaults.cardColors(
+           /* colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceContainer,
-            ),
+            ),*/
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 8.dp
             ),
@@ -176,7 +176,7 @@ fun MovieItem(
             modifier = Modifier.clickable { onItemClick(moviesItem) }
         ) {
             Column(
-                modifier = Modifier.background(colorResource(id = R.color.card_bg_color))
+               // modifier = Modifier.background(colorResource(id = R.color.card_bg_color))
             ) {
                 Row(
                     modifier = Modifier
@@ -203,7 +203,7 @@ fun MovieItem(
                         maxlines = 1,
                         fontSize = 14,
                         fontWeight = FontWeight.Normal,
-                        color = colorResource(id = R.color.secondaryTextColor),
+                        //color = colorResource(id = R.color.secondaryTextColor),
                         modifier = Modifier
                             .padding(end = 12.dp)
                             .weight(1f)
@@ -219,7 +219,7 @@ fun MovieItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    color = colorResource(id = R.color.secondaryTextColor)
+                  //  color = colorResource(id = R.color.secondaryTextColor)
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -239,13 +239,13 @@ fun MovieItem(
                                     bottomEnd = 16.dp  // Bottom right corner
                                 )
                             )
-                            .background(color = Color.White)
+                            .background(color = MaterialTheme.colorScheme.onSecondary)
                             .padding(4.dp)
                     ) {
                         CustomText(
                             text = "From R 929 pm",
                             boldText = listOf("929"),
-                            color = Color.Black,
+                           /* color = Color.Black,*/
                             fontSize = 14,
                             fontWeight = FontWeight.Normal,
                             modifier = Modifier
@@ -257,12 +257,12 @@ fun MovieItem(
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(16.dp))
-                            .background(color = Color.White)
+                            .background(color = MaterialTheme.colorScheme.onSecondary)
                             .padding(4.dp)
                     ) {
                         CustomText(
                             text = "View Details",
-                            color = Color.Black,
+                           /* color = Color.Black,*/
                             fontSize = 14,
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.Normal,

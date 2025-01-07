@@ -3,7 +3,6 @@ package com.example.bottomnavigationandbottomsheet.activities
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,11 +29,11 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -49,13 +48,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -155,6 +152,7 @@ class MainActivity : BaseActivity() {
         ModalNavigationDrawer(
             modifier = Modifier.fillMaxWidth(),
             gesturesEnabled = drawerState.isOpen,
+           // scrimColor = MaterialTheme.colorScheme.surfaceTint,
             drawerContent = {
                 Box(
                     modifier = Modifier
@@ -163,13 +161,13 @@ class MainActivity : BaseActivity() {
                     ModalDrawerSheet(
                         modifier = Modifier
                             .testTag("Navigation Drawer")
-                            .background(color = colorResource(id = R.color.bg_color)) // Custom background color
+                        //.background(color = colorResource(id = R.color.bg_color)) // Custom background color
                     ) {
                         NavBarHeader()
                         Spacer(
                             modifier = Modifier
                                 .height(1.dp)
-                                .background(colorResource(id = R.color.bg_color))
+                            // .background(colorResource(id = R.color.bg_color))
                         )
                         NavBarBody(
                             items = listOf(
@@ -211,12 +209,12 @@ class MainActivity : BaseActivity() {
                 topBar = {
                     TopAppBar(
                         modifier = Modifier.height(60.dp),
-                        colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = Color.Black,
-                            titleContentColor = Color.White,
-                            navigationIconContentColor = Color.White,
-                            actionIconContentColor = Color.White
-                        ),
+                        /* colors = TopAppBarDefaults.topAppBarColors(
+                             containerColor = Color.Black,
+                             titleContentColor = Color.White,
+                             navigationIconContentColor = Color.White,
+                             actionIconContentColor = Color.White
+                         ),*/
 
                         title = {
                             CustomText(
@@ -262,14 +260,14 @@ class MainActivity : BaseActivity() {
                                     BadgedBox(
                                         badge = {
                                             Badge(
-                                                contentColor = Color.White,
-                                                containerColor = Color.Red,
+                                                /*   contentColor = Color.White,
+                                                   containerColor = Color.Red,*/
                                                 modifier = Modifier
                                                     .offset(x = 4.dp, y = 0.dp)
                                             ) {
                                                 CustomText(
                                                     text = "3",
-                                                    color = Color.White,
+                                                    //color = Color.White,
                                                     fontSize = 12,
                                                 )
                                             }
@@ -332,7 +330,7 @@ class MainActivity : BaseActivity() {
         modifier: Modifier = Modifier,
     ) {
         BottomAppBar(
-            containerColor = Color.Black,
+            // containerColor = Color.Black,
             modifier = modifier
                 .height(60.dp)
                 .testTag("BottomBar")
@@ -350,8 +348,8 @@ class MainActivity : BaseActivity() {
             ) {
                 BadgedBox(badge = {
                     Badge(
-                        contentColor = Color.White,
-                        containerColor = Color.Red,
+                        /* contentColor = Color.White,
+                         containerColor = Color.Red,*/
                         modifier = Modifier
                             .offset(x = 4.dp, y = (0).dp)
                     ) {
@@ -429,7 +427,6 @@ class MainActivity : BaseActivity() {
                     painter = painterResource(id = R.drawable.sync),
                     contentDescription = "Starred",
                     modifier = Modifier.size(24.dp),
-                    // tint = if (selected.value == R.drawable.sync) Color.White else Color.DarkGray
                     tint = if (selected.value == R.drawable.sync) getIconTintColor(true) else getIconTintColor(
                         false
                     )

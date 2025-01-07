@@ -30,7 +30,7 @@ fun NavBarHeader() {
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth()
-            .background(color = colorResource(id = R.color.card_bg_color))
+            //.background(color = colorResource(id = R.color.card_bg_color))
             .padding(top = 16.dp, bottom = 24.dp),
 
         ) {
@@ -50,7 +50,7 @@ fun NavBarHeader() {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 CustomText(
-                    color = colorResource(id = R.color.secondaryTextColor),
+                   // color = colorResource(id = R.color.secondaryTextColor),
                     text = "Mobile Developer",
                     fontSize = 18
                 )
@@ -67,27 +67,27 @@ fun NavBarBody(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(color = colorResource(id = R.color.bg_color))
+            .fillMaxSize()/*
+            .background(color = colorResource(id = R.color.bg_color))*/
     ) {
         items.forEachIndexed { index, navigationItem ->
             NavigationDrawerItem(
-                colors = NavigationDrawerItemDefaults.colors(
+               /* colors = NavigationDrawerItemDefaults.colors(
                     unselectedContainerColor = colorResource(id = R.color.bg_color),
                     selectedContainerColor = colorResource(id = R.color.card_bg_color)
-                ),
+                ),*/
                 modifier = Modifier.padding(top = 8.dp),
                 label = {
                     Text(
                         text = navigationItem.title,
-                        color = colorResource(id = R.color.primaryTextColor)
+                      //  color = colorResource(id = R.color.primaryTextColor)
                     )
             },
                 selected = currentRoute == navigationItem.route,
                 onClick = { onClick(navigationItem) },
                 icon = {
                     Icon(
-                        tint = colorResource(id = R.color.primaryTextColor),
+                       // tint = colorResource(id = R.color.primaryTextColor),
                         imageVector = if (currentRoute == navigationItem.route) {
                             navigationItem.selectedIcon
                         } else {

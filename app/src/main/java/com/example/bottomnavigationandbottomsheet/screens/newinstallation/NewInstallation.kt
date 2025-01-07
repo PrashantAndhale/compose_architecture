@@ -39,7 +39,7 @@ fun NewInstallation(navController: NavHostController, sharedViewModel: SharedVie
             /* .background(
                  color = colorResource(id = R.color.bg_color)
              )*/
-            .background(
+            /*.background(
                 Brush.verticalGradient(
                     colors = listOf(
                         Color(0xFF6CA4BD).copy(alpha = 0.6f), // Lighter blue at the top
@@ -47,7 +47,7 @@ fun NewInstallation(navController: NavHostController, sharedViewModel: SharedVie
                         Color(0xFF022C4E).copy(alpha = 1f)   // Darker blue at the bottom
                     )
                 )
-            )
+            )*/
     ) {
         val isVisible = remember {
             mutableStateOf(false)  // Assuming resume.xml is in res/drawable

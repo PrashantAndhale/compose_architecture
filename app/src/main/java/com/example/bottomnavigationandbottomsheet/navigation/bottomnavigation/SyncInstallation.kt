@@ -24,9 +24,9 @@ fun SyncInstallation(navController: NavHostController, sharedViewModel: SharedVi
         .fillMaxSize()
         .fillMaxWidth()
         .padding(top = 60.dp)
-        .background(
+       /* .background(
             color = colorResource(id = R.color.bg_color)
-        ))
+        )*/)
     {
         Column(
             modifier = Modifier

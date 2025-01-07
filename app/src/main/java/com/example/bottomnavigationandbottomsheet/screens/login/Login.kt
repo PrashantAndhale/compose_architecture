@@ -67,7 +67,7 @@ fun Login(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = colorResource(id = R.color.bg_color_screen))
+            /*.background(color = colorResource(id = R.color.bg_color_screen))*/
     ) {
         // Background Image with fade-in
         Image(

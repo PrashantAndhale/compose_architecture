@@ -22,7 +22,7 @@ fun NoInternetConnection(
     onRetry: () -> Unit
 ) {
     Surface(
-        modifier = Modifier.fillMaxSize(), color = colorResource(id = R.color.bg_color)
+        modifier = Modifier.fillMaxSize()/*, color = colorResource(id = R.color.bg_color)*/
     ) {
         Column(
             modifier = Modifier

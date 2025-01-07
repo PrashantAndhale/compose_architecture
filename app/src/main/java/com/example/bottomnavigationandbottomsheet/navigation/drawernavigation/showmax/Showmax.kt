@@ -1,7 +1,5 @@
 package com.example.bottomnavigationandbottomsheet.navigation.drawernavigation.showmax
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,14 +8,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -32,12 +28,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import androidx.navigation.NavHostController
-import com.example.bottomnavigationandbottomsheet.R
 import com.example.bottomnavigationandbottomsheet.customcontrol.CustomOutlinedTextField
 import com.example.bottomnavigationandbottomsheet.customcontrol.CustomText
 import com.example.bottomnavigationandbottomsheet.customcontrol.LargeDropdownMenu
@@ -50,7 +43,7 @@ fun Showmax(navController: NavHostController, sharedViewModel: SharedViewModel) 
             .fillMaxSize()
             .fillMaxWidth()
             .padding(top = 60.dp)
-            .background(color = colorResource(id = R.color.bg_color))
+        /* .background(color = colorResource(id = R.color.bg_color))*/
     ) {
         var uname by rememberSaveable { mutableStateOf("") }
         val state = rememberTextFieldState("")
@@ -100,11 +93,11 @@ fun Showmax(navController: NavHostController, sharedViewModel: SharedViewModel) 
             Button(
                 onClick = { expanded = !expanded },
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .border(
-                        width = 0.5.dp, color = Color.Gray, shape = RoundedCornerShape(20.dp)
-                    ),
-                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.bg_color))
+                    .fillMaxWidth(),
+                /* .border(
+                     width = 0.5.dp, color = Color.Gray, shape = RoundedCornerShape(20.dp)
+                 )*/
+                //  colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.bg_color))
             )
             {
                 Text(
@@ -120,15 +113,15 @@ fun Showmax(navController: NavHostController, sharedViewModel: SharedViewModel) 
             }
             DropdownMenu(
                 modifier = Modifier
-                    .wrapContentWidth()
-                    .background(color = colorResource(id = R.color.primaryTextColor)),
+                    .wrapContentWidth(),
+                // .background(color = colorResource(id = R.color.primaryTextColor)),
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
             ) {
                 suggestions.forEachIndexed { index, label ->
                     DropdownMenuItem(
                         modifier = Modifier.fillMaxWidth(),
-                        text = { CustomText(text = label, color = Color.Black) },
+                        text = { CustomText(text = label) },
                         onClick = {
                             selectedText = label
                             expanded = false

@@ -36,9 +36,9 @@ fun ProfileDetails(
             .fillMaxSize()
             .fillMaxSize()
             .padding(top = 60.dp)
-            .background(
+          /*  .background(
                 color = colorResource(id = R.color.bg_color_screen)
-            )
+            )*/
     ) {
         Image(
             painter = painter,

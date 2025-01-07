@@ -24,9 +24,9 @@ fun Completed(navController: NavHostController, sharedViewModel: SharedViewModel
         .fillMaxSize()
         .fillMaxWidth()
         .padding(top = 60.dp)
-        .background(
+        /*.background(
             color = colorResource(id = R.color.bg_color)
-        ))
+        )*/)
     {
         Column(
             modifier = Modifier

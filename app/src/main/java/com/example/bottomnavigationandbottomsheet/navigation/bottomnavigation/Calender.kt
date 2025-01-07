@@ -24,9 +24,8 @@ fun Calender(navController: NavHostController, sharedViewModel: SharedViewModel)
         .fillMaxSize()
         .fillMaxWidth()
         .padding(top = 60.dp)
-        .background(
-            color = colorResource(id = R.color.bg_color)
-        ))
+        /*.background(color = colorResource(id = R.color.bg_color)
+        )*/)
     {
         Column(
             modifier = Modifier

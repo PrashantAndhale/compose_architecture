@@ -74,9 +74,9 @@ open class BaseActivity : ComponentActivity() {
     fun getIconTintColor(selected: Boolean): Color {
         val colors = MaterialTheme.colorScheme
         return if (selected) {
-            colors.onSecondary
+            colors.primary
         } else {
-            colors.surfaceTint
+            colors.secondary
         }
     }
 
@@ -86,7 +86,7 @@ open class BaseActivity : ComponentActivity() {
         onDismiss: () -> Unit
     ) {
         AlertDialog(
-            containerColor = colorResource(id = R.color.bg_color),
+           // containerColor = colorResource(id = R.color.bg_color),
             onDismissRequest = onDismiss,
             confirmButton = {
                 TextButton(onClick = onConfirm) {

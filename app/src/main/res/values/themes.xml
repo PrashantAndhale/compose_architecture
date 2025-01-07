@@ -4,7 +4,7 @@
     <style name="MySplashScreen" parent="Theme.SplashScreen">
 
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
-        <item name="windowSplashScreenBackground">@color/bg_color</item>  <!-- Replace with your desired color -->
+        <!--<item name="windowSplashScreenBackground">@color/bg_color</item> --> <!-- Replace with your desired color -->
         <item name="postSplashScreenTheme">@style/Theme.BottomNavigationAndBottomSheet</item>
     </style>
 

@@ -114,6 +114,7 @@ dependencies {
     // Dagger Hilt
     implementation(libs.hilt.android)
     implementation(libs.coil.kt.coil.compose)
+    implementation(libs.androidx.ui.text.google.fonts)
     kapt(libs.hilt.android.compiler)
     implementation(libs.hilt.navigation.compose)
 
