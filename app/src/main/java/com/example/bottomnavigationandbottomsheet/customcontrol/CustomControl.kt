@@ -233,7 +233,7 @@ fun <T> LargeDropdownMenu(
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
-                        tint = colorResource(id = R.color.primaryTextColor)
+                       // tint = colorResource(id = R.color.primaryTextColor)
                     )
                 }
             },

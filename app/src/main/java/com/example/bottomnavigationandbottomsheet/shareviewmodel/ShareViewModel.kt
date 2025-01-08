@@ -19,6 +19,7 @@ class SharedViewModel @Inject constructor(
     val preferencesHelper: SharedPreferencesHelper
 ) : ViewModel() {
 
+
     private val _callbackData = MutableStateFlow<MoviesItem?>(null) // Store the data in a StateFlow
     val callbackData: StateFlow<MoviesItem?> get() = _callbackData
     fun setCallbackData(moviesItem: MoviesItem?) {

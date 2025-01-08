@@ -1,8 +1,6 @@
 package com.example.bottomnavigationandbottomsheet.screens.notification
 
 
-import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,20 +20,19 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -52,6 +49,7 @@ import com.example.bottomnavigationandbottomsheet.customcontrol.CustomText
 import com.example.bottomnavigationandbottomsheet.navigation.commonnavigation.Screens
 import com.example.bottomnavigationandbottomsheet.shareviewmodel.SharedViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -60,6 +58,7 @@ fun Notification(navHostController: NavHostController, sharedViewModel: SharedVi
     val state = rememberTextFieldState("")
     val serachstate = rememberTextFieldState("")
     val permissionsGranted by sharedViewModel.permissionsGranted.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
@@ -96,10 +95,12 @@ fun Notification(navHostController: NavHostController, sharedViewModel: SharedVi
                 search = ""
             })
             CustomAnimatedBorderButton(onClick = {
-                if (!permissionsGranted) {
-                    sharedViewModel.requestPermissions()
-                } else {
-                    navHostController.navigate(Screens.NewInstallation.route)
+                coroutineScope.launch {
+                    if (!permissionsGranted) {
+                        sharedViewModel.requestPermissions()
+                    } else {
+                        navHostController.navigate(Screens.NewInstallation.route)
+                    }
                 }
             }, label = "LOGIN")
         }
