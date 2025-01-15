@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -47,7 +48,7 @@ import com.example.bottomnavigationandbottomsheet.shareviewmodel.SharedViewModel
 fun Login(
     navController: NavHostController,
     viewModel: SharedViewModel = hiltViewModel(),
-    preferencesHelper: SharedPreferencesHelper,
+    preferencesHelper: SharedPreferencesHelper?
 ) {
     // Define animation states
     val logoScale by animateFloatAsState(targetValue = 1f, animationSpec = tween(1000))
@@ -67,7 +68,7 @@ fun Login(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            /*.background(color = colorResource(id = R.color.bg_color_screen))*/
+            .background(color = colorResource(id = R.color.bg_color_screen))
     ) {
         // Background Image with fade-in
         Image(
@@ -84,6 +85,7 @@ fun Login(
         var uname by rememberSaveable { mutableStateOf("") }
         var password by rememberSaveable { mutableStateOf("") }
         val state = rememberTextFieldState("")
+        val state1 = rememberTextFieldState("")
 
         Column(
             modifier = Modifier
@@ -114,18 +116,28 @@ fun Login(
                 textAlign = TextAlign.Center,
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(16.dp)
+            )
             CustomOutlinedTextField(
+                modifier = Modifier
+                    .testTag("uname"),
                 value = uname,
                 onValueChange = state,
                 label = "Username",
                 leadingIcon = Icons.Default.Person
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(16.dp)
+            )
             CustomOutlinedTextField(
+                modifier = Modifier
+                    .testTag("password"),
                 value = password,
-                onValueChange = state,
+                onValueChange = state1,
                 label = "Password",
                 leadingIcon = Icons.Default.Lock,
                 trailingVisibleIcon = R.drawable.outline_visibility_24,
@@ -138,8 +150,8 @@ fun Login(
             CustomAnimatedBorderButton(onClick = {
                 navController.popBackStack()
                 viewModel.setLogin(true)
-                preferencesHelper.isLoggedIn = true
-            }, label = "Login")
+                preferencesHelper?.isLoggedIn = true
+            }, label = "Login", modifier = Modifier.testTag("login"))
         }
     }
 }

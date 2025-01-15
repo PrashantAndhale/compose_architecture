@@ -16,8 +16,6 @@ buildscript {
         classpath ("org.jetbrains.kotlin:kotlin-serialization:2.0.0")
     }
 }
-/*task<Delete>("clean") {
+task<Delete>("clean") {
     delete(rootProject.buildDir)
-}*/
-
-
+}

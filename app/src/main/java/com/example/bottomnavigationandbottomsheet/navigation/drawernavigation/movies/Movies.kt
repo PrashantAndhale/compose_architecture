@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -102,7 +103,7 @@ fun Movies(
 
             is Resource.Error -> {
                 state.error?.let {
-                    NoInternetConnection {}
+                    NoInternetConnection(title = it) {}
                 }
             }
 
@@ -125,6 +126,7 @@ fun LoadUI(
     navHostController: NavHostController,
     onItemClick: (MoviesItem) -> Unit
 ) {
+
     if (isConnected == true) {
         if (list != null) {
             MovieList(list, navHostController, onItemClick)

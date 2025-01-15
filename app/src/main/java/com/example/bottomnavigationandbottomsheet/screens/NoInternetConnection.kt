@@ -11,14 +11,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.bottomnavigationandbottomsheet.R
 import com.example.bottomnavigationandbottomsheet.customcontrol.CustomText
 
 @Composable
 fun NoInternetConnection(
+    title: String = "No Internet Connection",
+    description: String = "Please check your internet settings and try again.",
     onRetry: () -> Unit
 ) {
     Surface(
@@ -32,13 +33,15 @@ fun NoInternetConnection(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CustomText(
-                text = "No Internet Connection",
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+                text = title,
                 fontSize = 22,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
             Spacer(modifier = Modifier.height(16.dp))
             CustomText(
-                text = "Please check your internet settings and try again."
+                text = description
             )
             Spacer(modifier = Modifier.height(32.dp))
 

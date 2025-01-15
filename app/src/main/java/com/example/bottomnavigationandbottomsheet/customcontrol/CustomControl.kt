@@ -108,6 +108,7 @@ fun CustomText(
 
 @Composable
 fun CustomOutlinedTextField(
+    modifier: Modifier=Modifier,
     readonly: Boolean = false,
     value: String,
     onValueChange: TextFieldState,
@@ -121,7 +122,7 @@ fun CustomOutlinedTextField(
 ) {
     OutlinedTextField(
         shape = RoundedCornerShape(20.dp),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(55.dp)
             .onGloballyPositioned(onGloballyPositioned),
@@ -170,7 +171,9 @@ val customFontFamily = FontFamily(
 )
 
 @Composable
-fun CustomAnimatedBorderButton(onClick: () -> Unit, label: String) {
+fun CustomAnimatedBorderButton(
+    onClick: () -> Unit, label: String,
+    modifier: Modifier=Modifier) {
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val borderColor by infiniteTransition.animateColor(
         initialValue = Color.Red,
@@ -184,7 +187,7 @@ fun CustomAnimatedBorderButton(onClick: () -> Unit, label: String) {
 
     Button(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .border(
                 width = 2.dp, color = borderColor, shape = RoundedCornerShape(20.dp)

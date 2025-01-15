@@ -87,3 +87,4 @@ fun HandledPermissions(viewModel: SharedViewModel = hiltViewModel()) {
 fun PermissionState.isPermanentlyDenied(): Boolean {
     return !status.isGranted && !status.shouldShowRationale
 }
+

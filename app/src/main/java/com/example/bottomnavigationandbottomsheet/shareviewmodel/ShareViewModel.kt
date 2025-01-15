@@ -15,28 +15,29 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SharedViewModel @Inject constructor(
-    val preferencesHelper: SharedPreferencesHelper
+open class SharedViewModel @Inject constructor(
+    private val preferencesHelper: SharedPreferencesHelper // Use private to encapsulate
 ) : ViewModel() {
 
-
-    private val _callbackData = MutableStateFlow<MoviesItem?>(null) // Store the data in a StateFlow
+    // Callback Data for MoviesItem
+    private val _callbackData = MutableStateFlow<MoviesItem?>(null)
     val callbackData: StateFlow<MoviesItem?> get() = _callbackData
+
     fun setCallbackData(moviesItem: MoviesItem?) {
-        _callbackData.value = moviesItem // Set the data to trigger observers
+        _callbackData.value = moviesItem
     }
 
-    private val _isLogin = MutableStateFlow<Boolean>(false) // Store the data in a StateFlow
-    val isLogin: StateFlow<Boolean> get() = _isLogin
-    fun setLogin(islogin: Boolean) {
-        _isLogin.value = islogin // Set the data to trigger observers
+    // Login State
+   open val _isLogin = MutableStateFlow(false)
+   open val isLogin: StateFlow<Boolean> get() = _isLogin
+
+   open fun setLogin(isLogin: Boolean) {
+        _isLogin.value = isLogin
     }
 
-
-    /* <------ Confirmation Dialog Part----------->*/
-
+    // Confirmation Dialog State
     private val _confirmExitDialogState = MutableStateFlow(false)
-    val confirmExitDialogState = _confirmExitDialogState.asStateFlow()
+    val confirmExitDialogState: StateFlow<Boolean> get() = _confirmExitDialogState.asStateFlow()
 
     fun showConfirmExitDialog() {
         _confirmExitDialogState.value = true
@@ -45,31 +46,22 @@ class SharedViewModel @Inject constructor(
     fun dismissConfirmExitDialog() {
         _confirmExitDialogState.value = false
     }
-    /* <------ Confirmation Dialog Part----------->*/
 
-
-
-    /* <------ Permission Part----------->*/
-
-    // Mutable state flow to hold the permissions state
+    // Permissions Handling
     @OptIn(ExperimentalPermissionsApi::class)
-    val _permissionsState = MutableStateFlow<MultiplePermissionsState?>(null)
-
+    private val _permissionsState = MutableStateFlow<MultiplePermissionsState?>(null)
     @OptIn(ExperimentalPermissionsApi::class)
     val permissionsState: StateFlow<MultiplePermissionsState?> get() = _permissionsState.asStateFlow()
 
-    // Mutable state flow to track if permissions are granted
     private val _permissionsGranted = MutableStateFlow(false)
     val permissionsGranted: StateFlow<Boolean> get() = _permissionsGranted.asStateFlow()
 
-    // Function to initialize permissions state
     @OptIn(ExperimentalPermissionsApi::class)
     fun initializePermissionsState(state: MultiplePermissionsState) {
         _permissionsState.value = state
         checkPermissions()
     }
 
-    // Function to request permissions
     @OptIn(ExperimentalPermissionsApi::class)
     fun requestPermissions() {
         viewModelScope.launch {
@@ -77,20 +69,14 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    // Function to check if all permissions are granted
     @OptIn(ExperimentalPermissionsApi::class)
     fun arePermissionsGranted(): Boolean {
-        val state = _permissionsState.value
-        return state?.permissions?.all { it.status.isGranted } == true
+        return _permissionsState.value?.permissions?.all { it.status.isGranted } == true
     }
 
-    // Function to check if all permissions are granted
     @OptIn(ExperimentalPermissionsApi::class)
     fun checkPermissions() {
-        val state = _permissionsState.value
-        _permissionsGranted.value = state?.permissions?.all { it.status.isGranted } == true
+        _permissionsGranted.value =
+            _permissionsState.value?.permissions?.all { it.status.isGranted } == true
     }
-
-    /* <------ Permission Part----------->*/
-
 }

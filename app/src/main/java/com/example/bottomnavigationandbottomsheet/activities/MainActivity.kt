@@ -85,7 +85,7 @@ class MainActivity : BaseActivity() {
         setContent {
             AppTheme {
                 val sharedViewModel: SharedViewModel = hiltViewModel()  // Initialize ViewModel here
-                HandledPermissions(sharedViewModel)
+               // HandledPermissions(sharedViewModel)
                 val navigationControl = rememberNavController()
                 val isLogin by sharedViewModel.isLogin.collectAsState()
                 LaunchedEffect(isLogin) {

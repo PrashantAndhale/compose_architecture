@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
     alias(libs.plugins.compose.compiler)
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     id("kotlinx-serialization")
- }
+}
 
 android {
     namespace = "com.example.bottomnavigationandbottomsheet"
@@ -17,11 +17,17 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner =
+            "com.example.bottomnavigationandbottomsheet.utils.CustomTestRunner"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+    }
+    kapt {
+        correctErrorTypes = true
+        useBuildCache = true
     }
 
     buildTypes {
@@ -48,7 +54,7 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE-notice.md,LICENSE.md}"
         }
     }
 }
@@ -65,7 +71,7 @@ dependencies {
     implementation(libs.support.vector.drawable)
 
     // Compose BOM (Bill of Materials)
-    implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.androidx.compose.bom.v20230100))
 
     // Core Android UI and Compose
     implementation(libs.androidx.activity.compose)
@@ -112,20 +118,27 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     // Dagger Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.coil.kt.coil.compose)
-    implementation(libs.androidx.ui.text.google.fonts)
-    kapt(libs.hilt.android.compiler)
+    implementation(libs.hilt.android.v255)
+    implementation(libs.ui.text.google.fonts)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockito.mockito.android)
+    //androidTestImplementation(libs.mockito.inline)
+    androidTestImplementation(libs.navigation.testing)
+    kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.coil.kt.coil.compose)
 
-    //Icons
+
+    // Icon
     implementation(libs.androidx.material.icons.core)
     implementation(libs.androidx.material.icons.extended)
 
     // Testing Libraries
     testImplementation(libs.junit)
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test.v160)
     testImplementation(libs.turbine)
     testImplementation(libs.robolectric)
     testImplementation(libs.kotlin.reflect)
@@ -133,12 +146,13 @@ dependencies {
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(platform(libs.androidx.compose.bom.v20230100))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.compiler)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
-
-
