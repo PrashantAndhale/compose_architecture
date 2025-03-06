@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 data class MoviesItem (
         @PrimaryKey(autoGenerate = false)
         val id: Int,
-        val image: String,
-        val imdb_url: String,
-        val movie: String,
+        val image: String?,
+        val imdb_url: String?,
+        val movie: String?,
         val rating: Double
 )

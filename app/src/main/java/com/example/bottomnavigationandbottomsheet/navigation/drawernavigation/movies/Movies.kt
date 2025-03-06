@@ -74,9 +74,9 @@ fun Movies(
             .fillMaxSize()
             .fillMaxWidth()
             .padding(top = 60.dp)
-           /* .background(
-                color = colorResource(id = R.color.bg_color)
-            )*/
+        /* .background(
+             color = colorResource(id = R.color.bg_color)
+         )*/
     ) {
         when (val state = moviesState) {
             is Resource.Loading -> {
@@ -171,9 +171,9 @@ fun MovieItem(
             .padding(horizontal = 2.dp, vertical = 8.dp)
     ) {
         Card(
-           /* colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainer,
-            ),*/
+            /* colors = CardDefaults.cardColors(
+                 containerColor = MaterialTheme.colorScheme.surfaceContainer,
+             ),*/
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 8.dp
             ),
@@ -181,7 +181,7 @@ fun MovieItem(
             modifier = Modifier.clickable { onItemClick(moviesItem) }
         ) {
             Column(
-               // modifier = Modifier.background(colorResource(id = R.color.card_bg_color))
+                // modifier = Modifier.background(colorResource(id = R.color.card_bg_color))
             ) {
                 Row(
                     modifier = Modifier
@@ -192,7 +192,7 @@ fun MovieItem(
 
                 ) {
                     CustomText(
-                        text = moviesItem.movie,
+                        text = moviesItem.movie ?: "Unknown",
                         fontSize = 16,
                         overflow = TextOverflow.Ellipsis,
                         maxlines = 1,
@@ -224,7 +224,7 @@ fun MovieItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                  //  color = colorResource(id = R.color.secondaryTextColor)
+                    //  color = colorResource(id = R.color.secondaryTextColor)
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -250,7 +250,7 @@ fun MovieItem(
                         CustomText(
                             text = "From R 929 pm",
                             boldText = listOf("929"),
-                           /* color = Color.Black,*/
+                            /* color = Color.Black,*/
                             fontSize = 14,
                             fontWeight = FontWeight.Normal,
                             modifier = Modifier
@@ -267,7 +267,7 @@ fun MovieItem(
                     ) {
                         CustomText(
                             text = "View Details",
-                           /* color = Color.Black,*/
+                            /* color = Color.Black,*/
                             fontSize = 14,
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.Normal,

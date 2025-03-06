@@ -67,6 +67,7 @@ mockitoMockitoCore = "5.15.2"
 mockitoKotlin = "5.4.0"
 mockk = "1.13.16"
 navigationTestingVersion = "2.9.0-alpha04"
+uiTestJunit4Version = "1.8.0-alpha07"
 
 [libraries]
 androidx-compose-bom-v20230100 = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }
@@ -145,6 +146,7 @@ mockito-mockito-core = { group = "org.mockito", name = "mockito-core", version.r
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigationTestingVersion" }
+androidx-compose-ui-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "uiTestJunit4Version" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

@@ -17,8 +17,7 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner =
-            "com.example.bottomnavigationandbottomsheet.utils.CustomTestRunner"
+        testInstrumentationRunner = "com.example.bottomnavigationandbottomsheet.utils.CustomTestRunner"
 
         // testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -123,6 +122,8 @@ dependencies {
     testImplementation(libs.androidx.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.mockk)
+    testImplementation(libs.androidx.compose.ui.ui.test.junit4)
+    testImplementation(libs.navigation.testing)
     androidTestImplementation(libs.mockito.mockito.android)
     //androidTestImplementation(libs.mockito.inline)
     androidTestImplementation(libs.navigation.testing)

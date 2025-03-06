@@ -1,7 +1,5 @@
 package com.example.bottomnavigationandbottomsheet.screens.login
 
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
@@ -74,8 +72,8 @@ class LoginScreenTest {
         }
 
         // Perform text input in the username and password fields
-        composeTestRule.onNodeWithTag("uname").performTextInput("prashant")
-        composeTestRule.onNodeWithTag("password").performTextInput("andhale")
+        composeTestRule.onNodeWithTag("uname").performTextInput("admin")
+        composeTestRule.onNodeWithTag("password").performTextInput("admin")
 
         // Wait for the idle state (UI updates to complete)
         composeTestRule.waitForIdle()
