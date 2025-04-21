@@ -10,6 +10,7 @@ import com.example.data.network.utils.observeConnectivityAsFlow
 import com.example.data.repository.PagerNewsRepositoryImpl
 import com.example.domain.model.NewsDetails
 import com.example.domain.model.Newspapers
+import com.example.domain.use_cases.GetNewsDetailUseCases
 import com.example.domain.use_cases.GetNewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,6 +25,7 @@ import javax.inject.Inject
 class NewsViewModel @Inject constructor(
     private val repository: PagerNewsRepositoryImpl,
     private val cases: GetNewsUseCases,
+    private val casesDetails: GetNewsDetailUseCases,
     private val application: Application
 ) : ViewModel() {
 
@@ -72,12 +74,12 @@ class NewsViewModel @Inject constructor(
         }
     }
 
-   /* fun getNewsDetail(id: String?) {
+    fun getNewsDetail(id: String?) {
         viewModelScope.launch {
-            cases.getNewsDetail(id).collect { resource ->
+            casesDetails.getNewsDetail(id).collect { resource ->
                 _newsdetail.value = resource
             }
         }
-    }*/
+    }
 }
 

@@ -6,11 +6,13 @@ import com.example.data.network.ApiService
 import com.example.data.network.NetworkConnectionChecker
 import com.example.data.network.NoInternetInterceptor
 import com.example.data.paging.NewsPagingSource
- import com.example.data.repository.NewsRepositoryImpl
+import com.example.data.repository.NewsDetailsRepositoryImpl
+import com.example.data.repository.NewsRepositoryImpl
 import com.example.data.repository.PagerNewsRepositoryImpl
 import com.example.data.room.NewsDAO
 import com.example.data.room.NewsDataBase
- import com.example.domain.repository.NewsRepository
+import com.example.domain.repository.NewsDetailRepository
+import com.example.domain.repository.NewsRepository
 import com.example.domain.repository.PagerMoviesRepository
 import dagger.Module
 import dagger.Provides
@@ -119,8 +121,8 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideNewsDetailRepository(newsPagingSource: NewsPagingSource): PagerMoviesRepository {
-        return PagerNewsRepositoryImpl(newsPagingSource)
+    fun provideNewsDetailRepository(apiService: ApiService): NewsDetailRepository {
+        return NewsDetailsRepositoryImpl(apiService)
     }
 
     @Provides
