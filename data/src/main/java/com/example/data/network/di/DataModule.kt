@@ -5,12 +5,12 @@ import com.example.common.Constant
 import com.example.data.network.ApiService
 import com.example.data.network.NetworkConnectionChecker
 import com.example.data.network.NoInternetInterceptor
-import com.example.data.paging.MoviesPagingSource
-import com.example.data.repository.MoviesRepositoryImpl
-import com.example.data.repository.PagerMoviesRepositoryImpl
-import com.example.data.room.MovieDAO
-import com.example.data.room.MovieDataBase
-import com.example.domain.repository.MoviesRepository
+import com.example.data.paging.NewsPagingSource
+ import com.example.data.repository.NewsRepositoryImpl
+import com.example.data.repository.PagerNewsRepositoryImpl
+import com.example.data.room.NewsDAO
+import com.example.data.room.NewsDataBase
+ import com.example.domain.repository.NewsRepository
 import com.example.domain.repository.PagerMoviesRepository
 import dagger.Module
 import dagger.Provides
@@ -85,8 +85,8 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideMoviesRepository(apiService: ApiService): MoviesRepository {
-        return MoviesRepositoryImpl(apiService)
+    fun provideMoviesRepository(apiService: ApiService): NewsRepository {
+        return NewsRepositoryImpl(apiService)
     }
 
     @Provides
@@ -94,27 +94,33 @@ object DataModule {
     fun provideMoviesPagingSource(
         apiService: ApiService,
         networkConnectionChecker: NetworkConnectionChecker,
-        dao: MovieDAO
-    ): MoviesPagingSource {
-        return MoviesPagingSource(apiService, networkConnectionChecker, dao)
+        dao: NewsDAO
+    ): NewsPagingSource {
+        return NewsPagingSource(apiService, networkConnectionChecker, dao)
     }
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): MovieDataBase {
-        return MovieDataBase.getInstance(context)
+    fun provideDatabase(@ApplicationContext context: Context): NewsDataBase {
+        return NewsDataBase.getInstance(context)
     }
 
     @Provides
     @Singleton
-    fun provideDAO(movieDataBase: MovieDataBase): MovieDAO {
-        return movieDataBase.getMovieDAO()
+    fun provideDAO(newsDataBase: NewsDataBase): NewsDAO {
+        return newsDataBase.getNewsDAO()
     }
 
     @Provides
     @Singleton
-    fun providePagerMoviesRepository(moviesPagingSource: MoviesPagingSource): PagerMoviesRepository {
-        return PagerMoviesRepositoryImpl(moviesPagingSource)
+    fun providePagerMoviesRepository(newsPagingSource: NewsPagingSource): PagerMoviesRepository {
+        return PagerNewsRepositoryImpl(newsPagingSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDetailRepository(newsPagingSource: NewsPagingSource): PagerMoviesRepository {
+        return PagerNewsRepositoryImpl(newsPagingSource)
     }
 
     @Provides

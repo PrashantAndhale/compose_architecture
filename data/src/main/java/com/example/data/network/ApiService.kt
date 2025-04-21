@@ -1,9 +1,10 @@
 package com.example.data.network
 
-import com.example.data.network.model.MoviesDTO
-import com.example.data.network.model.MoviesItemDTO
-import com.example.data.network.model.MoviesRequest
-import com.example.domain.model.MoviesItem
+import com.example.data.network.model.NewsDetailsDTO
+import com.example.data.network.model.NewsPaperDTO
+import com.example.data.network.model.NewspapersDTO
+import com.example.domain.model.NewsDetails
+import com.example.domain.model.Newspapers
 import com.google.gson.JsonObject
 import retrofit2.Response
 import retrofit2.http.Body
@@ -13,9 +14,12 @@ import retrofit2.http.Path
 
 
 interface ApiService {
-    @GET("movies")
-    suspend fun getMovies(): Response<MoviesDTO>
+    @GET("newspapers.json")
+    suspend fun getNews(): Response<NewsPaperDTO>
 
-    @GET("movies/{id}")
-    suspend fun getMoviesDetails(@Path("id") id: Int): Response<MoviesItemDTO>
+    @GET("lccn/{id}.json")
+    suspend fun getNewsDetail(
+        @Path("id") id: String? // Add the id parameter as a path parameter
+    ): Response<NewsDetailsDTO>
 }
+

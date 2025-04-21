@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bottomnavigationandbottomsheet"
+    namespace = "com.example.news"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.bottomnavigationandbottomsheet"
+        applicationId = "com.example.news"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -119,6 +119,7 @@ dependencies {
     // Dagger Hilt
     implementation(libs.hilt.android.v255)
     implementation(libs.ui.text.google.fonts)
+    implementation(libs.androidx.foundation.android)
     testImplementation(libs.androidx.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.mockk)

@@ -1,7 +1,7 @@
 package com.example.domain.di
 
-import com.example.domain.repository.MoviesRepository
-import com.example.domain.use_cases.GetMoviesUseCases
+import com.example.domain.repository.NewsRepository
+import com.example.domain.use_cases.GetNewsUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 object DomainModule {
     @Provides
     @Singleton
-    fun provideGetMoviesUseCases(repository: MoviesRepository): GetMoviesUseCases {
-        return GetMoviesUseCases(repository)
+    fun provideGetNewsUseCases(repository: NewsRepository): GetNewsUseCases {
+        return GetNewsUseCases(repository)
     }
 }
