@@ -2,6 +2,7 @@ package com.example.news.customcontrol
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
@@ -27,17 +28,14 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -45,6 +43,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -64,8 +63,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.news.R
-import com.google.android.material.color.MaterialColors.ALPHA_DISABLED
-import com.google.android.material.color.MaterialColors.ALPHA_FULL@Composable
+
+@Composable
 fun CustomText(
     maxlines: Int = 10,
     overflow: TextOverflow = TextOverflow.Visible,
@@ -91,18 +90,23 @@ fun CustomText(
             }
         }
     }
-
+    val animatedAlpha = remember { Animatable(0.3f) }
+    LaunchedEffect(Unit) {
+        animatedAlpha.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 700)
+        )
+    }
     Text(
         maxLines = maxlines,
         overflow = overflow,
         textAlign = textAlign,
-        modifier = modifier,
+        modifier = modifier.alpha(animatedAlpha.value),//.placeholder(visible = true, highlight = PlaceholderHighlight.fade()),
         text = annotatedText,
         color = color, // Applied color property
         style = TextStyle(
-            fontSize = fontSize.sp,
-            fontWeight = fontWeight
-        )
+            fontSize = fontSize.sp, fontWeight = fontWeight
+        ),
     )
 }
 
@@ -121,8 +125,7 @@ fun CustomOutlinedTextField(
     onGloballyPositioned: (LayoutCoordinates) -> Unit = {},
     color: Color = colorResource(id = R.color.primaryTextColor) // Added color property
 ) {
-    OutlinedTextField(
-        shape = RoundedCornerShape(20.dp),
+    OutlinedTextField(shape = RoundedCornerShape(20.dp),
         modifier = modifier
             .fillMaxWidth()
             .height(55.dp)
@@ -135,16 +138,14 @@ fun CustomOutlinedTextField(
             {
                 IconButton(onClick = { leadingIconClick?.invoke() }) {
                     Icon(
-                        imageVector = leadingIcon,
-                        contentDescription = null
+                        imageVector = leadingIcon, contentDescription = null
                     )
                 }
             }
         } else null,
         label = {
             CustomText(
-                text = label,
-                color = color // Applied color property
+                text = label, color = color // Applied color property
             )
         },
         trailingIcon = if (isPasswordVisible != null && trailingVisibleIcon != null && trailingInvisibleIcon != null) {
@@ -160,13 +161,11 @@ fun CustomOutlinedTextField(
                     }
                 }
             }
-        } else null
-    )
+        } else null)
 }
 
 val customFontFamily = FontFamily(
-    Font(R.font.avenir_book_normal, FontWeight.Normal),
-    Font(R.font.avenir_heavy, FontWeight.Bold)
+    Font(R.font.avenir_book_normal, FontWeight.Normal), Font(R.font.avenir_heavy, FontWeight.Bold)
 )
 
 @Composable
@@ -197,9 +196,7 @@ fun CustomAnimatedBorderButton(
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
     ) {
         CustomText(
-            text = label,
-            fontWeight = FontWeight.Bold,
-            color = color // Applied color property
+            text = label, fontWeight = FontWeight.Bold, color = color // Applied color property
         )
     }
 }
@@ -226,8 +223,7 @@ fun <T> LargeDropdownMenu(
 ) {
     var expanded by remember { mutableStateOf(false) }
     Box(modifier = modifier.height(IntrinsicSize.Min)) {
-        OutlinedTextField(
-            shape = RoundedCornerShape(20.dp),
+        OutlinedTextField(shape = RoundedCornerShape(20.dp),
             label = { CustomText(text = label, color = color) },
             value = items.getOrNull(selectedIndex)?.let { selectedItemToString(it) } ?: "",
             enabled = true,
@@ -238,8 +234,7 @@ fun <T> LargeDropdownMenu(
                 val icon = if (expanded) Icons.Filled.ArrowDropUp else Icons.Filled.ArrowDropDown
                 IconButton(onClick = { }) {
                     Icon(
-                        imageVector = icon,
-                        contentDescription = null
+                        imageVector = icon, contentDescription = null
                     )
                 }
             },

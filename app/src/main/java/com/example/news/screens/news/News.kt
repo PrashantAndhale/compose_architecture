@@ -7,19 +7,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,17 +32,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import com.example.common.Resource
+import com.example.domain.model.Newspapers
 import com.example.news.customcontrol.CustomText
 import com.example.news.navigation.commonnavigation.Screens
 import com.example.news.screens.NoInternetConnection
 import com.example.news.shareviewmodel.SharedViewModel
-import com.example.common.Resource
-import com.example.domain.model.Newspapers
+import com.example.news.utils.CommonTopBar
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -53,19 +58,10 @@ fun News(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    CustomText(
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth(),
-                        text = "Newspapers",
-                        fontSize = 22, color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF2196F3) // Example: Blue background
-                )
+            CommonTopBar(
+                title = "Newspapers",
+                navController = navController,
+                showBackButton = false
             )
         }
     ) { paddingValues ->
@@ -132,10 +128,10 @@ fun MovieList(
     onItemClick: (Newspapers) -> Unit
 ) {
     LazyColumn(
+        modifier = Modifier.padding(4.dp),
         contentPadding = PaddingValues(
-            start = 4.dp, end = 4.dp, top = 4.dp, bottom = 4.dp
+            start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp
         ),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(movies) { movie ->
             NewspaperCard(movie, navHostController, onItemClick)
@@ -150,24 +146,51 @@ fun NewspaperCard(
     onItemClick: (Newspapers) -> Unit
 ) {
     Card(
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.cardColors(),
         modifier = Modifier
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = 4.dp, vertical = 4.dp)
             .fillMaxWidth()
             .clickable { onItemClick(newsItem) }
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            newsItem.title?.let {
-                CustomText(
-                    text = it,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
+        Column(modifier = Modifier.padding(8.dp)) {
+            Row(
+                verticalAlignment = Alignment.Top,
+                horizontalArrangement = Arrangement.End,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                newsItem.title?.let {
+                    CustomText(
+                        text = it,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+                Row{
+                    IconButton(
+                        onClick = { },
+                        modifier = Modifier.size(25.dp) // or smaller if needed
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Favorite,
+                            contentDescription = "Favorite",
+                            tint = Color.Red
+                        )
+                    }
+                    IconButton(
+                        onClick = { },
+                        modifier = Modifier.size(25.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete",
+                            tint = Color.Gray
+                        )
+                    }
+                }
             }
 
             CustomText(
